@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Welcome</title>
+</head>
+
+<body>
+    <h5><a href="exam/logout">Logout</a></h5>
+    <h5><a href="exam/new">Add A New Item</a></h5>
+    <h1>Welcome {{person.first_name}} {{person.last_name}}</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {%endif%}
+    <form>
+        {% csrf_token %}
+        <h4>Your Wish List</h4>
+        <table>
+            <thead>
+                <th scope="col">Item</th>
+                <th scope="col">Added by</thsc>
+                    <th scope="col">Date Added</th>
+                    <th scope="col">Action</th>
+            </thead>
+            <tbody>
+                {%for x in my_stuff%}
+
+                <tr>
+                    <td><a href="exam/{{x.id}}/show">{{x.name}}</a></td>
+                    <td>{{x.creator.first_name}}</td>
+                    <td>{{x.date_added}}</td>
+                    <td>
+                        <a href="exam/{{x.id}}/remove">Remove from my list</a>
+                        <a href="exam/{{x.id}}/delete">Delete</a>
+
+                    </td>
+                </tr>
+                {%endfor%}
+
+            </tbody>
+        </table>
+    </form>
+    <form>
+        {% csrf_token %}
+        <table>
+            <thead>
+                <th scope="col">Item</th>
+                <th scope="col">Added by</th>
+                <th scope="col">Dated Added</th>
+                <th scope="col">Action</th>
+            </thead>
+            <tbody>
+                {% for thing in stuff %} 
+                    {%if not thing in my_stuff%}
+                <tr>
+                    <td><a href="exam/{{thing.id}}/show">{{thing.name}}</a></td>
+                    <td>{{thing.creator.first_name}}</td>
+                    <td>{{thing.date_added}}</td>
+                    <td>
+                        <a href="exam/{{thing.id}}/join">Add to my Wish list!</a>
+                        <a href="exam/{{thing.id}}/delete">Delete</a>
+                    </td>
+                </tr>
+                    {%endif%}
+                 {%endfor%}
+
+            </tbody>
+        </table>
+    </form>
+
+</body>
+
+</html>

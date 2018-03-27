@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Show Item</title>
+</head>
+<body>
+    <h6><a href="/exam">Home</a> <a href="/exam/logout">Log Out</a>
+        <h1>{{things.name}}</h1>
+
+        <h3>Other Users that added this Item!!!!</h3>
+        {%for user in things.join.all%}
+        <h5>{{user.first_name}}</h5>
+        {%endfor%}
+
+
+    
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add New Item</title>
+</head>
+
+<body>
+    <form action="/exam/create" method="POST">
+        {% csrf_token %}
+        <h6><a href="/exam">Home</a> <a href="/exam/logout">Logout</a></h6>
+        <h4>Add a New Item</h4>
+        <label for="name">Item/product:</label>
+        <input type="text" name="name">
+        <input type="submit" value="Add">
+    </form>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}{%endif%}
+    </ul>
+</body>
+
+</html>
